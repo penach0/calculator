@@ -1,0 +1,41 @@
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#calculator{
+    height: 400px;
+    width: 300px;
+    border: solid;
+    display: flex;
+    flex-direction: column;
+}
+
+#display{
+    border: 1px solid;
+    margin-top: 10px;
+    margin-left: 3px;
+    margin-right: 3px;
+    padding: 5px 3px;
+    font-size: 35px;
+    text-align: end;
+}
+
+#buttons{
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-grow:3;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+
+button{
+    flex-grow: 1;
+}
