@@ -5,7 +5,6 @@ const divide = (a, b) => a / b;
 
 let operator;
 let storedValue;
-let temp;
 
 const display = document.querySelector('#display');
 const firstOperand = document.createElement('p');
@@ -25,12 +24,10 @@ function numbers(e){
     if (!operator) {
         firstOperand.textContent += e.target.textContent;
         display.appendChild(firstOperand);
-    } else if(operator === '='){
-        temp += e.target.textContent;
-        firstOperand.textContent = temp;
-        temp = '';
-        operator = '';
-        storedValue = '';
+    } else if(operator === '=' && storedValue){
+        clear(e);
+        firstOperand.textContent += e.target.textContent;
+        display.appendChild(firstOperand);
     } else{
         secondOperand.textContent += e.target.textContent;
         if(display.contains(firstOperand)) display.replaceChild(secondOperand, firstOperand);
@@ -40,7 +37,7 @@ function numbers(e){
 function storeValues(e){
     if(!storedValue){
         storedValue = firstOperand.textContent;
-    } else{
+    } else if(secondOperand.textContent){
         operate(storedValue, secondOperand.textContent, operator);
     }
     operator = e.target.textContent;
