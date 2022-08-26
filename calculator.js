@@ -3,64 +3,65 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-let displayValue;
 let operator;
-let firstOperand;
-let secondOperand;
+let storedValue;
+let displayValue;
 
 const display = document.querySelector('#display');
-console.log(display);
+const firstOperand = document.createElement('p');
+const secondOperand = document.createElement('p');
+const newOperand = document.createElement('p');
+
 const nums = [...document.getElementsByClassName('number')];
 nums.forEach(num => num.addEventListener('click', numbers));
 
 const operators = [...document.getElementsByClassName('operator')];
-operators.forEach(operator => operator.addEventListener('click', storeValues))
+operators.forEach(operator => operator.addEventListener('click', storeValues));
 
-const equal = document.querySelector('.equal');
-console.log(equal);
-equal.addEventListener('click', e =>
-    display.textContent = operate(firstOperand, displayValue, operator));
-
-function storeValues(e){
-    operator = e.target.textContent;
-    firstOperand = displayValue; 
-    display.textContent = '';
-}
 
 function numbers(e){
-    display.textContent += e.target.textContent;
-    displayValue = display.textContent;
-    /* if(operator) {
-        display.textContent = '';
-    } */
+    if (!operator) {
+        firstOperand.textContent += e.target.textContent;
+        display.appendChild(firstOperand);
+    } else if(operator === '='){
+        newOperand.textContent += e.target.textContent;
+        firstOperand.textContent = newOperand.textContent;
+        newOperand.textContent = '';
+        operator = '';
+        storedValue = '';
+    } else{
+        secondOperand.textContent += e.target.textContent;
+        if(display.contains(firstOperand)) display.replaceChild(secondOperand, firstOperand);
+    }   
 }
 
+function storeValues(e){
+    if(!storedValue){
+        storedValue = firstOperand.textContent;
+    } else{
+        operate(storedValue, secondOperand.textContent, operator);
+    }
+    operator = e.target.textContent;
+}
 
 function operate(a, b, operation){
-    console.log(a);
-    console.log(b);
-    console.log(operation);
     switch(operation){
-        case '+': return add(a,b);
-        case '-': return subtract(a,b);
-        case '*': return multiply(a,b);
-        case '/': return divide(a,b);
-    };
-    
-
-
-    /* switch(operation){
         case '+':
-            display.textContent = add(a,b);
+            firstOperand.textContent = add(a,b);
             break;
         case '-':
-            display.textContent = subtract(a,b);
+            firstOperand.textContent = subtract(a,b);
             break;
         case '*':
-            display.textContent = multiply(a,b);
+            firstOperand.textContent = multiply(a,b);
             break;
         case '/':
-            display.textContent = divide(a,b);
+            firstOperand.textContent = divide(a,b);
             break;
-    }; */
+        case '=':
+            return;
+    };
+    display.replaceChild(firstOperand, secondOperand);
+    storedValue = firstOperand.textContent;
+    secondOperand.textContent = '';
 }
