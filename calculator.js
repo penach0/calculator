@@ -5,12 +5,11 @@ const divide = (a, b) => a / b;
 
 let operator;
 let storedValue;
-let displayValue;
+let temp;
 
 const display = document.querySelector('#display');
 const firstOperand = document.createElement('p');
 const secondOperand = document.createElement('p');
-const newOperand = document.createElement('p');
 
 const nums = [...document.getElementsByClassName('number')];
 nums.forEach(num => num.addEventListener('click', numbers));
@@ -18,15 +17,18 @@ nums.forEach(num => num.addEventListener('click', numbers));
 const operators = [...document.getElementsByClassName('operator')];
 operators.forEach(operator => operator.addEventListener('click', storeValues));
 
+const allClear = document.querySelector('.clear');
+allClear.addEventListener('click', clear);
+
 
 function numbers(e){
     if (!operator) {
         firstOperand.textContent += e.target.textContent;
         display.appendChild(firstOperand);
     } else if(operator === '='){
-        newOperand.textContent += e.target.textContent;
-        firstOperand.textContent = newOperand.textContent;
-        newOperand.textContent = '';
+        temp += e.target.textContent;
+        firstOperand.textContent = temp;
+        temp = '';
         operator = '';
         storedValue = '';
     } else{
@@ -63,5 +65,12 @@ function operate(a, b, operation){
     };
     display.replaceChild(firstOperand, secondOperand);
     storedValue = firstOperand.textContent;
+    secondOperand.textContent = '';
+}
+
+function clear(e){
+    operator = '';
+    storedValue = '';
+    firstOperand.textContent = '';
     secondOperand.textContent = '';
 }
