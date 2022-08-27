@@ -1,7 +1,11 @@
 const add = (a, b) => +a + +b;
 const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+const divide = (a, b) => {
+    if(+b === 0) {
+        return "Self-destruct in 5, 4..."
+    } else return a / b;
+};
 
 let operator;
 let storedValue;
