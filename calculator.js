@@ -3,12 +3,13 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => {
     if(+b === 0) {
-        return "Self-destruct in 5, 4..."
+        return "Self-destruct"
     } else return a / b;
 };
 
 let operator;
 let storedValue;
+const maxSize = 14;
 
 const display = document.querySelector('#display');
 const firstOperand = document.createElement('p');
@@ -26,15 +27,19 @@ allClear.addEventListener('click', clear);
 
 function numbers(e){
     if (!operator) {
-        firstOperand.textContent += e.target.textContent;
-        display.appendChild(firstOperand);
+        if(firstOperand.textContent.length < maxSize){
+            firstOperand.textContent += e.target.textContent;
+            display.appendChild(firstOperand);
+        }
     } else if(operator === '=' && storedValue){
         clear(e);
         firstOperand.textContent += e.target.textContent;
         display.appendChild(firstOperand);
     } else{
-        secondOperand.textContent += e.target.textContent;
-        if(display.contains(firstOperand)) display.replaceChild(secondOperand, firstOperand);
+        if(secondOperand.textContent.length < maxSize){
+            secondOperand.textContent += e.target.textContent;
+            if(display.contains(firstOperand)) display.replaceChild(secondOperand, firstOperand);
+        }
     }   
 }
 
@@ -64,6 +69,11 @@ function operate(a, b, operation){
         case '=':
             return;
     };
+
+    if(firstOperand.textContent.length > maxSize + 1){
+        firstOperand.textContent = "Overflow";
+    }
+
     display.replaceChild(firstOperand, secondOperand);
     storedValue = firstOperand.textContent;
     secondOperand.textContent = '';
