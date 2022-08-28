@@ -24,6 +24,9 @@ operators.forEach(operator => operator.addEventListener('click', storeValues));
 const allClear = document.querySelector('.clear');
 allClear.addEventListener('click', clear);
 
+const float = document.querySelector('.float');
+float.addEventListener('click', decimalPoint);
+
 
 function numbers(e){
     if (!operator) {
@@ -73,7 +76,7 @@ function operate(a, b, operation){
 
     if(firstOperand.textContent.length > maxSize + 1){
         if(firstOperand.textContent.includes('.')){
-            firstOperand.textContent = decimalSize(firstOperand.textContent);
+            firstOperand.textContent = parseFloat(decimalSize(firstOperand.textContent));
         } else firstOperand.textContent = "Overflow";
     }
 
@@ -93,4 +96,10 @@ function decimalSize(string){
     let excess = string.length - maxSize;
     let separated = string.split('.');
     return((+string).toFixed(separated[1].length - excess));
+    
+}
+
+function decimalPoint(e){
+    if(display.firstChild.textContent.includes('.')) return;
+    display.firstChild.textContent += '.';
 }
