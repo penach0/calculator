@@ -29,6 +29,7 @@ float.addEventListener('click', decimalPoint);
 
 
 function numbers(e){
+    removePressed();
     if (!operator) {
         if(firstOperand.textContent.length < maxSize){
             firstOperand.textContent += e.target.textContent;
@@ -47,6 +48,8 @@ function numbers(e){
 }
 
 function storeValues(e){
+    removePressed();
+    e.target.classList.add('pressed');
     if(!firstOperand.textContent && !secondOperand.textContent) return;
     if(!storedValue){
         storedValue = firstOperand.textContent;
@@ -90,6 +93,7 @@ function clear(e){
     storedValue = '';
     firstOperand.textContent = '';
     secondOperand.textContent = '';
+    removePressed();
 }
 
 function decimalSize(string){
@@ -102,4 +106,10 @@ function decimalSize(string){
 function decimalPoint(e){
     if(display.firstChild.textContent.includes('.')) return;
     display.firstChild.textContent += '.';
+}
+
+function removePressed(){
+    operators.forEach((operator) => {
+        if(operator.classList.contains('pressed')) operator.classList.remove('pressed')
+    });
 }

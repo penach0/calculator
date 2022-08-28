@@ -15,7 +15,7 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     background-image: url(./img/pexels-cottonbro-5184961.jpg);
     background-size: cover;
     backdrop-filter: blur(2px);
@@ -93,4 +93,9 @@ button{
 .clear{
     background-color:rgb(223, 43, 43);
     border-color: rgb(163, 21, 21);
+}
+
+.pressed{
+    background-color:rgb(133, 80, 50);
+    border-color: rgb(63, 57, 53);
 }
