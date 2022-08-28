@@ -17,36 +17,21 @@ const secondOperand = document.createElement('p');
 
 const nums = [...document.getElementsByClassName('number')];
 nums.forEach(num => num.addEventListener('click', numbers));
-document.addEventListener('keydown', e => {
- if(!isNaN(e.key)) numbers(e);
-});
 
 const operators = [...document.getElementsByClassName('operator')];
 operators.forEach(operator => operator.addEventListener('click', storeValues));
-document.addEventListener('keydown', e => {
-    if(['+','-','*','/','Enter'].includes(e.key)) storeValues(e);
-});
 
 const allClear = document.querySelector('.clear');
 allClear.addEventListener('click', clear);
-document.addEventListener('keydown', e => {
-    if(e.key === 'Delete') clear(e);
-})
 
 const float = document.querySelector('.float');
 float.addEventListener('click', decimalPoint);
-document.addEventListener('keydown', e => {
-    if(e.key === '.') decimalPoint(e);
-})
 
 const backSpace = document.querySelector('.backspace');
 backSpace.addEventListener('click', clearOne);
-document.addEventListener('keydown', e => {
-    if(e.key === 'Backspace') clearOne(e);
-})
 
-/* const keyboardSupport = document.addEventListener('keydown', e => {
-    switch(e.key){
+const keyboardSupport = document.addEventListener('keydown', e => {
+    switch (true) {
         case !isNaN(e.key):
             numbers(e);
             break;
@@ -64,7 +49,7 @@ document.addEventListener('keydown', e => {
             break;
         default: return;
     }
-}) */
+})
 
 function numbers(e){
     removePressed();
@@ -148,7 +133,6 @@ function clear(e){
 function clearOne(e){
     if(!display.firstChild) return;
     display.firstChild.textContent = display.firstChild.textContent.slice(0, -1);
-    if(display.firstChild.textContent === '') clear(e);
 }
 
 function decimalSize(string){
