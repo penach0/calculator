@@ -27,6 +27,9 @@ allClear.addEventListener('click', clear);
 const float = document.querySelector('.float');
 float.addEventListener('click', decimalPoint);
 
+const backSpace = document.querySelector('.backspace');
+backSpace.addEventListener('click', clearOne);
+
 
 function numbers(e){
     removePressed();
@@ -93,6 +96,14 @@ function clear(e){
     storedValue = '';
     firstOperand.textContent = '';
     secondOperand.textContent = '';
+    removePressed();
+}
+
+function clearOne(e){
+    if(!display.firstChild) return;
+    display.firstChild.textContent = display.firstChild.textContent.slice(0, -1);
+    operator = ''
+    storedValue = '';
     removePressed();
 }
 

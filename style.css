@@ -36,6 +36,7 @@ p{
     padding: 15px;
     border: 2px solid rgb(56, 58, 58);
     border-radius: 5px;
+    box-shadow: 0 0 10px 5px rgb(58, 53, 53);
     gap: 2px;
     background-color: rgb(100, 102, 102);
 }
@@ -57,18 +58,21 @@ p{
     font-family: 'Oswald', sans-serif;
     margin-top: 20px;
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     flex: 4 1 0;
     gap: 2px;
 }
 
-.column{
+.row{
     display: flex;
-    flex-direction: column;
     flex: 1 1 0;
     gap: 2px;
 }
 
+.last-row{
+    display: flex;
+}
 
 button{
     flex: 1 1 0;
@@ -90,9 +94,14 @@ button{
     border-color: rgb(202, 100, 40);
 }
 
-.clear{
+.clear,
+.backspace{
     background-color:rgb(223, 43, 43);
     border-color: rgb(163, 21, 21);
+}
+
+.equal{
+    flex: 3.22 1 auto;
 }
 
 .pressed{
