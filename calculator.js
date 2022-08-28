@@ -44,6 +44,7 @@ function numbers(e){
 }
 
 function storeValues(e){
+    if(!firstOperand.textContent && !secondOperand.textContent) return;
     if(!storedValue){
         storedValue = firstOperand.textContent;
     } else if(secondOperand.textContent){
@@ -71,7 +72,9 @@ function operate(a, b, operation){
     };
 
     if(firstOperand.textContent.length > maxSize + 1){
-        firstOperand.textContent = "Overflow";
+        if(firstOperand.textContent.includes('.')){
+            firstOperand.textContent = decimalSize(firstOperand.textContent);
+        } else firstOperand.textContent = "Overflow";
     }
 
     display.replaceChild(firstOperand, secondOperand);
@@ -84,4 +87,10 @@ function clear(e){
     storedValue = '';
     firstOperand.textContent = '';
     secondOperand.textContent = '';
+}
+
+function decimalSize(string){
+    let excess = string.length - maxSize;
+    let separated = string.split('.');
+    return((+string).toFixed(separated[1].length - excess));
 }
