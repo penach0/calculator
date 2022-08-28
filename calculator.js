@@ -9,7 +9,7 @@ const divide = (a, b) => {
 
 let operator;
 let storedValue;
-const maxSize = 14;
+const maxSize = 12;
 
 const display = document.querySelector('#display');
 const firstOperand = document.createElement('p');
